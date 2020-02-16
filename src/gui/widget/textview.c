@@ -205,7 +205,6 @@ static void TextView_OnAutoSize(LCUI_Widget w, float *width, float *height,
 				LCUI_LayoutRule rule)
 {
 	int max_width, max_height;
-	int text_width, text_height;
 	float scale = LCUIMetrics_GetScale();
 
 	LCUI_RectF rect;
@@ -244,15 +243,13 @@ static void TextView_OnAutoSize(LCUI_Widget w, float *width, float *height,
 	TextLayer_SetMaxSize(txt->layer, max_width, max_height);
 	TextLayer_Update(txt->layer, &rects);
 	TextLayer_ClearInvalidRect(txt->layer);
-	text_width = TextLayer_GetWidth(txt->layer);
-	text_height = TextLayer_GetHeight(txt->layer);
+	*width = TextLayer_GetWidth(txt->layer) / scale;
+	*height = TextLayer_GetHeight(txt->layer) / scale;
 	for (LinkedList_Each(node, &rects)) {
 		LCUIRect_ToRectF(node->data, &rect, 1.0f / scale);
 		Widget_InvalidateArea(w, &rect, SV_CONTENT_BOX);
 	}
 	RectList_Clear(&rects);
-	*width = TextLayer_GetWidth(txt->layer) / scale;
-	*height = TextLayer_GetHeight(txt->layer) / scale;
 }
 
 static void TextView_OnResize(LCUI_Widget w, float width, float height)
