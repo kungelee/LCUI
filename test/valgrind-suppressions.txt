@@ -14,7 +14,7 @@
    fun:_dl_allocate_tls
    fun:allocate_stack
    fun:pthread_create@@GLIBC_2.2.5
-   obj:*/lib*/libgomp.so*
+   obj:*/libgomp.so*
    fun:GOMP_parallel
    fun:LCUIDisplay_RenderSurface
 }
@@ -23,10 +23,5 @@
    Memcheck:Param
    sched_setaffinity(mask)
    fun:syscall
-   obj:*/lib*/libomp.so*
-   obj:*/lib*/libomp.so*
-   obj:*/lib*/libomp.so*
-   obj:*/lib*/libomp.so*
-   fun:__kmpc_fork_call
-   fun:LCUIDisplay_RenderSurface
+   obj:*/libomp.*
 }
